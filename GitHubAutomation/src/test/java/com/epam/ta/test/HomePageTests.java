@@ -25,10 +25,11 @@ public class HomePageTests extends CommonConditions {
     @Test(description = "Test checks incrementing of Adults field by pushing '+' button")
     public void incrementTest(){
         HomePage page = new HomePage(driver).openPage();
-        String currentAdultsNumber = page.getAdultsNumber();
+        page.adultsClick();
+        int currentAdultsNumber = Integer.parseInt(page.getAdultsNumber());
         page.adultsInremention();
-        String newAdultsNumber = page.getAdultsNumber();
-        Assert.assertEquals(currentAdultsNumber, newAdultsNumber);
+        int newAdultsNumber = Integer.parseInt(page.getAdultsNumber());
+        Assert.assertEquals(currentAdultsNumber+1, newAdultsNumber);
     }
 
 }

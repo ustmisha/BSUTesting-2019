@@ -42,7 +42,7 @@ public class HomePage extends AbstractPage {
     @FindBy(xpath = "//*[@id=\"departDate\"]")
     private WebElement enddateSelect;
 
-    @FindBy(xpath = "//*[@id=\"guestsAdults\"]")
+    @FindBy(xpath = "//*[@id=\"totalGuestsLbl\"]")
     private WebElement adultsSelect;
 
     @FindBy(xpath = "//*[@id=\"guestsChildren\"]")
@@ -54,12 +54,19 @@ public class HomePage extends AbstractPage {
     @FindBy(xpath = "//*[@id=\"quickSearch\"]/div[4]/div/div[1]/div/button[2]")
     private WebElement adultsIncrement;
 
+    @FindBy(xpath = "//*[@id=\"guestsAdults\"]")
+    private WebElement adultsNumber;
+
     public void search() {
         searchButton.click();
     }
 
     public void adultsInremention() {
         adultsIncrement.click();
+    }
+
+    public void adultsClick() {
+        adultsSelect.click();
     }
 
     public void insertLocation(Place place){
@@ -96,9 +103,14 @@ public class HomePage extends AbstractPage {
     }
 
     public String getAdultsNumber(){
-        WebElement element = adultsSelect;
+        WebElement element = adultsNumber;
         String adultsNumber = element.getAttribute("value");
+        LOGGER.info(adultsNumber);
         return adultsNumber;
+    }
+
+    public WebElement getAdultsIncrement() {
+        return adultsIncrement;
     }
 
 }
