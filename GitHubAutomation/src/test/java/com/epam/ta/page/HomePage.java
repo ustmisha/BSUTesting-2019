@@ -1,8 +1,6 @@
 package com.epam.ta.page;
 
-import com.epam.ta.model.Date;
-import com.epam.ta.model.Guests;
-import com.epam.ta.model.Place;
+import com.epam.ta.model.*;
 import com.epam.ta.service.PlaceCreator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -57,8 +55,54 @@ public class HomePage extends AbstractPage {
     @FindBy(xpath = "//*[@id=\"guestsAdults\"]")
     private WebElement adultsNumber;
 
+    @FindBy(xpath = "//*[@id=\"optInEmail\"]")
+    private WebElement emailInput;
+
+    @FindBy(xpath = "//*[@id=\"submitOptInEmail\"]")
+    private WebElement emailSubscribeButton;
+
+    @FindBy(xpath = "//*[@id=\"frmOptInEmail\"]/p/span/span")
+    private WebElement emailError;
+
+    @FindBy(xpath = "//*[@id=\"frmOptInEmail\"]/p/i")
+    private WebElement subscribeTick;
+
+    @FindBy(xpath = "//*[@id=\"searchBanner\"]/div[1]/div")
+    private WebElement titleText;
+
+    @FindBy(xpath = "//*[@id=\"nav-menu\"]/ul/li[5]/button")
+    private WebElement signInDropdown;
+
+    @FindBy(xpath = "//*[@id=\"nav-menu\"]/ul/li[5]/div/ul/li[1]")
+    private WebElement signInTravellersButton;
+
+    @FindBy(xpath = "//*[@id=\"nav-menu\"]/ul/li[2]/button")
+    private WebElement currencyChangeDropdown;
+
+    @FindBy(xpath = "//*[@id=\"nav-menu\"]/ul/li[2]/button/span/span")
+    private WebElement selectedCurrencyMark;
+
+    @FindBy(xpath = "//*[@id=\"nav-menu\"]/ul/li[2]/div/ul/li[4]")
+    private WebElement currencyChangeButtonEuro;
+
     public void search() {
         searchButton.click();
+    }
+
+    public void signInDropdownClick() {
+        signInDropdown.click();
+    }
+
+    public void currencyChangeDropdownClick() {
+        currencyChangeDropdown.click();
+    }
+
+    public void currencyChangeEuroClick() {
+        currencyChangeButtonEuro.click();
+    }
+
+    public void signInTravellersClick() {
+        signInTravellersButton.click();
     }
 
     public void adultsInremention() {
@@ -72,6 +116,11 @@ public class HomePage extends AbstractPage {
     public void insertLocation(Place place){
         locationSelect.sendKeys(place.getLocation());
         LOGGER.info(place.getLocation() + " selected");
+    }
+
+    public void insertId(HomeID id){
+        locationSelect.sendKeys(id.getHomeID());
+        LOGGER.info(id.getHomeID() + " id entered");
     }
 
     public void insertStartDate(Date date){
@@ -107,6 +156,39 @@ public class HomePage extends AbstractPage {
         String adultsNumber = element.getAttribute("value");
         LOGGER.info(adultsNumber);
         return adultsNumber;
+    }
+
+    public String getSelectedCurrency(){
+        WebElement element = selectedCurrencyMark;
+        String selectedCurrency = element.getAttribute("value");
+        LOGGER.info(selectedCurrency);
+        return selectedCurrency;
+    }
+
+    public void insertEmail(Email email){
+        locationSelect.sendKeys(email.getEmail());
+        LOGGER.info(email.getEmail() + " email address selected");
+    }
+
+    public boolean getEmailErrorMessage(PageError error) {
+        return emailError.isDisplayed()
+                && emailError.getText().
+                contains(error.getErrorDescription());
+    }
+
+    public String getURL(){
+        String URL = HOMEPAGE_URL;
+        return URL;
+    }
+
+    public boolean getTitle(PageError error) {
+        return titleText.isDisplayed()
+                && titleText.getText().
+                contains(error.getErrorDescription());
+    }
+
+    public void subscribe() {
+        emailSubscribeButton.click();
     }
 
     public WebElement getAdultsIncrement() {
