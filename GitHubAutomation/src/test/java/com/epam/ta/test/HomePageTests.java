@@ -61,7 +61,7 @@ public class HomePageTests extends CommonConditions {
         HomePage page = new HomePage(driver).openPage();
         page.currencyChangeDropdownClick();
         page.currencyChangeEuroClick();
-        String expectedCurrency = "$ ";
+        String expectedCurrency = "€ ";
         Assert.assertEquals(page.getSelectedCurrency(), expectedCurrency);
     }
 }
