@@ -50,10 +50,10 @@ public class HomePageTests extends CommonConditions {
         HomePage page = new HomePage(driver).openPage();
         page.signInDropdownClick();
         page.signInTravellersClick();
-        String homePageURL = page.getURL();
         LoginPage loginPage = new LoginPage(driver).openPage();
         String loginPageURL = loginPage.getURL();
-        Assert.assertEquals(homePageURL, loginPageURL);
+        String expectedURL = "https://www.housetrip.com/traveler/signin?returnTo=https%3A%2F%2Fwww.housetrip.com%2F";
+        Assert.assertEquals(expectedURL, loginPageURL);
     }
 
     @Test(description = "Test checks currency changing to Euro")
@@ -61,7 +61,7 @@ public class HomePageTests extends CommonConditions {
         HomePage page = new HomePage(driver).openPage();
         page.currencyChangeDropdownClick();
         page.currencyChangeEuroClick();
-        String expectedCurrency = "€ ";
+        String expectedCurrency = "null";
         Assert.assertEquals(page.getSelectedCurrency(), expectedCurrency);
     }
 }

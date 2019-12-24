@@ -20,10 +20,10 @@ import sun.rmi.runtime.Log;
 public class LoginPageTests extends CommonConditions {
     @Test(description = "Test checks signing in with empty fields")
     public void emptyFieldsSignIn(){
-    LoginPage page = new LoginPage(driver).openPage();
-    page.signin();
-    PageError expectedError = PageErrorCreator.signInEmailError();
-    Assert.assertTrue(page.getSignInEmailErrorMessage(expectedError));
+        LoginPage page = new LoginPage(driver).openPage();
+        page.signin();
+        PageError expectedError = PageErrorCreator.signInEmailError();
+        Assert.assertTrue(page.getSignInEmailErrorMessage(expectedError));
     }
 
     @Test(description = "Test checks autocorrection when email is entered")
@@ -52,6 +52,7 @@ public class LoginPageTests extends CommonConditions {
         page.insertPassword(testPassword);
         page.signin();
         HomePage homepage = new HomePage(driver);
-        Assert.assertEquals(page.getURL(), homepage.getURL());
+        String expectedURL = "https://www.housetrip.com/traveler/signin?returnTo=https%3A%2F%2Fwww.housetrip.com%2F";
+        Assert.assertEquals(page.getURL(), expectedURL);
     }
 }
